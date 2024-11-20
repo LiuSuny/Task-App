@@ -1,22 +1,26 @@
+
+@if (isAddingTask) {
+  <app-add-new-task (cancel)="onCancelAddTask()" 
+  (add)="onAddTask($event)"/>
+}
+
 <section id="tasks">
 <header>
     <h2>{{name}}'s Tasks</h2>
 
     <menu>
-  <button>Add Tasks</button>
+  <button (click)="onStartAddTask()">Add Tasks</button>
     </menu>
 </header>
 
 <ul>
+  @for (task of selectedUserTask; track task.id) {
     <li>
-        <app-new-task/>
-    </li>
-    <li>
-      <app-new-task/>
-   </li>
-   <li>
-    <app-new-task/>
+      <app-new-task [task]="task" (complete)="onCompleteTask($event)"/>
   </li>
+  }
+    
+    
 </ul>
 </section>
 
